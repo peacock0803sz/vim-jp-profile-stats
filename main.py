@@ -1,3 +1,4 @@
+import os
 from collections.abc import Iterable
 
 import gspread
@@ -7,11 +8,12 @@ import plotly.express as px
 import streamlit as st
 
 SITE_TITLE = "vim-jp 使用環境の統計ダッシュボード"
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
 
 
 @st.cache_resource()
 def get_auth():
-    return gspread.api_key("AIzaSyB0h6GSzBeqsI25lkw_nETJ6keihMtRyIc")
+    return gspread.api_key(GOOGLE_API_KEY)
 
 
 @st.cache_data()
