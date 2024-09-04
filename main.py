@@ -31,7 +31,9 @@ def get_sheet_df(file_id: str):
 st.set_page_config(layout="wide", page_title=SITE_TITLE, page_icon="📊")
 st.title(SITE_TITLE)
 st.write("""
-vim-jp Slackで公開している[使用環境調査シート](https://docs.google.com/spreadsheets/d/1o9bzmYKO0cKI3GQWSJePM_GrfnJRPGW3FdmyVLeP1JY/edit?gid=1550499250#gid=1550499250)の統計情報を表示するダッシュボード  
+vim-jp Slackで公開している[使用環境調査シート](https://docs.google.com/spreadsheets/d/1o9bzmYKO0cKI3GQWSJePM_GrfnJRPGW3FdmyVLeP1JY/edit?gid=1550499250#gid=1550499250)の統計情報を表示するダッシュボード
+
+GitHub: [peacock0803sz/vim-jp-profile-stats](https://github.com/peacock0803sz/vim-jp-profile-stats)  
 Author: [@peacock0803sz](https://twitter.com/peacock0803sz)
 """)
 
