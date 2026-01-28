@@ -1,7 +1,7 @@
-import { eq, isNull } from "drizzle-orm";
+import { eq, and, ne, isNull } from "drizzle-orm";
 import { categories, categoryValues } from "../db/schema";
 import type { Database } from "../db/client";
-import type { Category } from "../types";
+import type { Category, CreateCategoryInput, UpdateCategoryInput } from "../types";
 
 export async function getAllCategories(db: Database): Promise<Category[]> {
   const rows = await db
@@ -80,4 +80,85 @@ function buildCategoryTree(
   }
 
   return roots;
+}
+
+// ============ Admin Operations ============
+
+// 同階層での名前重複チェック
+export async function isDuplicateCategoryName(
+  db: Database,
+  name: string,
+  parentId: number | null,
+  excludeId?: number,
+): Promise<boolean> {
+  const conditions = [eq(categories.name, name)];
+
+  if (parentId === null) {
+    conditions.push(isNull(categories.parentId));
+  } else {
+    conditions.push(eq(categories.parentId, parentId));
+  }
+
+  if (excludeId !== undefined) {
+    conditions.push(ne(categories.id, excludeId));
+  }
+
+  const existing = await db
+    .select()
+    .from(categories)
+    .where(and(...conditions))
+    .get();
+
+  return !!existing;
+}
+
+export async function createCategory(
+  db: Database,
+  input: CreateCategoryInput,
+): Promise<Category> {
+  const result = await db
+    .insert(categories)
+    .values({
+      name: input.name,
+      parentId: input.parentId ?? null,
+      displayOrder: input.displayOrder ?? 0,
+    })
+    .returning()
+    .get();
+
+  return { ...result, parentId: result.parentId ?? null };
+}
+
+export async function updateCategory(
+  db: Database,
+  id: number,
+  input: UpdateCategoryInput,
+): Promise<Category | null> {
+  const existing = await getCategory(db, id);
+  if (!existing) return null;
+
+  const updates: Record<string, unknown> = {};
+  if (input.name !== undefined) updates.name = input.name;
+  if (input.parentId !== undefined) updates.parentId = input.parentId;
+  if (input.displayOrder !== undefined) updates.displayOrder = input.displayOrder;
+
+  if (Object.keys(updates).length === 0) return existing;
+
+  await db.update(categories).set(updates).where(eq(categories.id, id));
+
+  return (await getCategory(db, id))!;
+}
+
+export async function deleteCategory(
+  db: Database,
+  id: number,
+): Promise<boolean> {
+  const existing = await getCategory(db, id);
+  if (!existing) return false;
+
+  // 子カテゴリの値を先に削除
+  await db.delete(categoryValues).where(eq(categoryValues.categoryId, id));
+  await db.delete(categories).where(eq(categories.id, id));
+
+  return true;
 }

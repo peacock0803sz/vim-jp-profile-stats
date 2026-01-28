@@ -8,6 +8,7 @@ export type Env = {
   JWT_SECRET: string;
   ENVIRONMENT: string;
   FRONTEND_URL: string;
+  ADMIN_GITHUB_IDS: string; // カンマ区切りの GitHub ID リスト
 };
 
 export function createDb(d1: D1Database) {

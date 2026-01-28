@@ -9,9 +9,9 @@ type AuthVariables = {
   user: User;
 };
 
-export const authMiddleware = createMiddleware<
-  AppEnv & { Variables: AuthVariables }
->(async (c, next) => {
+export type AuthEnv = AppEnv & { Variables: AuthVariables };
+
+export const authMiddleware = createMiddleware<AuthEnv>(async (c, next) => {
   const token = getCookie(c, "token");
   if (!token) {
     return c.json({ message: "Unauthorized" }, 401);
@@ -29,5 +29,21 @@ export const authMiddleware = createMiddleware<
   }
 
   c.set("user", user);
+  await next();
+});
+
+// 管理者権限チェック (authMiddleware の後に使用)
+export const adminMiddleware = createMiddleware<AuthEnv>(async (c, next) => {
+  const user = c.get("user");
+  const adminIds = (c.env.ADMIN_GITHUB_IDS ?? "")
+    .split(",")
+    .map((id) => id.trim())
+    .filter(Boolean)
+    .map(Number);
+
+  if (!adminIds.includes(user.githubId)) {
+    return c.json({ message: "Forbidden" }, 403);
+  }
+
   await next();
 });

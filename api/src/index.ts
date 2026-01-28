@@ -5,6 +5,8 @@ import auth from "./routes/auth";
 import categoriesRoute from "./routes/categories";
 import statisticsRoute from "./routes/statistics";
 import responsesRoute from "./routes/responses";
+import adminCategoriesRoute from "./routes/admin/categories";
+import categoryValuesRoute from "./routes/categoryValues";
 import type { Env } from "./db/client";
 
 export type AppEnv = {
@@ -25,5 +27,9 @@ app.route("/auth", auth);
 app.route("/categories", categoriesRoute);
 app.route("/statistics", statisticsRoute);
 app.route("/responses", responsesRoute);
+
+// 管理者ルート
+app.route("/admin/categories", adminCategoriesRoute);
+app.route("/categories", categoryValuesRoute);
 
 export default app;
