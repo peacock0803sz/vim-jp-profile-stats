@@ -246,19 +246,19 @@
 
 ## C30 `:pencil: Update README and quickstart`
 
-- [ ] T088 Update README.md with project overview
-- [ ] T089 Validate and update quickstart.md
+- [x] T088 Update README.md with project overview
+- [x] T089 Validate and update quickstart.md
 
 ## C31 `:lipstick: Add responsive styles and UX polish`
 
-- [ ] T090 Add responsive styles in frontend/src/styles/
-- [ ] T091 Add staleTime optimization to TanStack Query hooks
-- [ ] T092 Ensure loading states for all async operations
+- [x] T090 Add responsive styles in frontend/src/styles/
+- [x] T091 Add staleTime optimization to TanStack Query hooks
+- [x] T092 Ensure loading states for all async operations
 
 ## C32 `:rocket: Validate Terraform deployment`
 
-- [ ] T093 Test Terraform plan/apply for dev environment
-- [ ] T094 Create infra/environments/prod.tfvars
+- [x] T093 Test Terraform plan/apply for dev environment
+- [x] T094 Create infra/environments/prod.tfvars
 
 ---
 
