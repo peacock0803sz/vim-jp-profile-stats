@@ -1,0 +1,19 @@
+{
+  "name": "scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed": "npx tsx seed.ts",
+    "migrate": "npx tsx migrate.ts",
+    "verify": "npx tsx verify.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.30.0",
+    "better-sqlite3": "^11.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "@types/better-sqlite3": "^7.0.0",
+    "typescript": "^5.7.0"
+  }
+}
