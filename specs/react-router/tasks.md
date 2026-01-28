@@ -88,44 +88,44 @@
 
 ## C07 `:sparkles: Add Drizzle ORM schema and migrations`
 
-- [ ] T029 Create api/src/db/schema.ts (users, categories, categoryValues, responses, responseAnswers)
-- [ ] T030 Create api/src/db/client.ts (Drizzle client)
-- [ ] T031 Create api/migrations/0001_initial.sql
+- [x] T029 Create api/src/db/schema.ts (users, categories, categoryValues, responses, responseAnswers)
+- [x] T030 Create api/src/db/client.ts (Drizzle client)
+- [x] T031 Create api/migrations/0001_initial.sql
 
 ## C08 `:label: Add shared types and Zod validators`
 
-- [ ] T032 Create api/src/types.ts (shared TypeScript interfaces)
-- [ ] T033 Create api/src/validators.ts (Zod schemas)
+- [x] T032 Create api/src/types.ts (shared TypeScript interfaces)
+- [x] T033 Create api/src/validators.ts (Zod schemas)
 
 ## C09 `:sparkles: Add Hono app with middleware`
 
-- [ ] T034 Create api/src/index.ts (Hono app entry)
-- [ ] T035 Create api/src/middleware/cors.ts
-- [ ] T036 Create api/src/middleware/error.ts
+- [x] T034 Create api/src/index.ts (Hono app entry)
+- [x] T035 Create api/src/middleware/cors.ts
+- [x] T036 Create api/src/middleware/error.ts
 
 ## C10 `:lock: Add GitHub OAuth authentication`
 
-- [ ] T037 Create api/src/services/auth.ts (JWT create/verify, user management)
-- [ ] T038 Create api/src/middleware/auth.ts (JWT verification middleware)
-- [ ] T039 Create api/src/routes/auth.ts (GET /auth/github, /auth/callback, /auth/me, POST /auth/logout)
+- [x] T037 Create api/src/services/auth.ts (JWT create/verify, user management)
+- [x] T038 Create api/src/middleware/auth.ts (JWT verification middleware)
+- [x] T039 Create api/src/routes/auth.ts (GET /auth/github, /auth/callback, /auth/me, POST /auth/logout)
 
 ## C11 `:sparkles: Add TanStack Query and API client`
 
-- [ ] T040 Create frontend/src/lib/api.ts (API client)
-- [ ] T041 Create frontend/src/lib/query.ts (QueryClient provider)
+- [x] T040 Create frontend/src/lib/api.ts (API client)
+- [x] T041 Create frontend/src/lib/query.ts (QueryClient provider)
 
 ## C12 `:sparkles: Add React Router app shell`
 
-- [ ] T042 Create frontend/src/main.tsx (app entry with providers)
-- [ ] T043 Create frontend/src/routes/root.tsx (root layout)
-- [ ] T044 Create frontend/src/components/Header.tsx
-- [ ] T045 Create frontend/src/components/LoadingSpinner.tsx
-- [ ] T046 Create frontend/src/components/ErrorBoundary.tsx
+- [x] T042 Create frontend/src/main.tsx (app entry with providers)
+- [x] T043 Create frontend/src/routes/root.tsx (root layout)
+- [x] T044 Create frontend/src/components/Header.tsx
+- [x] T045 Create frontend/src/components/LoadingSpinner.tsx
+- [x] T046 Create frontend/src/components/ErrorBoundary.tsx
 
 ## C13 `:card_index: Add database seed script`
 
-- [ ] T047 Create scripts/seed.ts (initial 19 categories)
-- [ ] T048 Add seed script to package.json
+- [x] T047 Create scripts/seed.ts (initial 19 categories)
+- [x] T048 Add seed script to package.json
 
 **Checkpoint**: Foundation ready - User Story implementation can begin
 
