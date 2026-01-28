@@ -218,25 +218,25 @@
 
 ## C26 `:sparkles: Add admin category management API` [US4]
 
-- [ ] T078 Extend api/src/middleware/auth.ts (admin role check)
-- [ ] T079 Extend api/src/services/categories.ts (createCategory, updateCategory, duplicate check)
-- [ ] T080 Create api/src/routes/admin/categories.ts (POST, PUT, DELETE /admin/categories)
-- [ ] T081 Create api/src/routes/categoryValues.ts (POST, DELETE /categories/:id/values)
+- [x] T078 Extend api/src/middleware/auth.ts (admin role check)
+- [x] T079 Extend api/src/services/categories.ts (createCategory, updateCategory, duplicate check)
+- [x] T080 Create api/src/routes/admin/categories.ts (POST, PUT, DELETE /admin/categories)
+- [x] T081 Create api/src/routes/categoryValues.ts (POST, DELETE /categories/:id/values)
 
 ## C27 `:sparkles: Add admin hooks` [US4]
 
-- [ ] T082 Create frontend/src/hooks/useCategoryMutation.ts
+- [x] T082 Create frontend/src/hooks/useCategoryMutation.ts
 
 ## C28 `:lipstick: Add admin UI components` [US4]
 
-- [ ] T083 Create frontend/src/components/admin/CategoryForm.tsx
-- [ ] T084 Create frontend/src/components/admin/CategoryValueForm.tsx
+- [x] T083 Create frontend/src/components/admin/CategoryForm.tsx
+- [x] T084 Create frontend/src/components/admin/CategoryValueForm.tsx
 
 ## C29 `:sparkles: Add admin routes` [US4]
 
-- [ ] T085 Create frontend/src/routes/admin.tsx (admin layout)
-- [ ] T086 Create frontend/src/routes/admin.categories.tsx (category list)
-- [ ] T087 Create frontend/src/routes/admin.categories.$id.tsx (category detail)
+- [x] T085 Create frontend/src/routes/admin.tsx (admin layout)
+- [x] T086 Create frontend/src/routes/admin.categories.tsx (category list)
+- [x] T087 Create frontend/src/routes/admin.categories.$id.tsx (category detail)
 
 **Checkpoint**: US4 Complete - Category management functional
 
