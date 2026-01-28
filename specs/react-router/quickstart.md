@@ -122,7 +122,6 @@ vim-jp-profile-stats/
 ├── infra/                    # IaC (Terraform, Cloudflare モジュール構成)
 │   └── modules/             # database, api, frontend
 ├── scripts/                  # マイグレーションスクリプト等
-├── wrangler.toml             # Wrangler 設定（D1）
 └── specs/                    # 仕様書
 ```
 
@@ -145,11 +144,11 @@ pnpm migrate:verify
 pnpm db:studio  # Drizzle Studio 起動
 ```
 
-2. または API 経由:
+2. または管理者API経由 (要管理者権限):
 ```bash
-curl -X POST http://localhost:3000/api/categories \
+curl -X POST http://localhost:3000/admin/categories \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $TOKEN" \
+  --cookie "token=$JWT_TOKEN" \
   -d '{"name": "新しいカテゴリ", "parentId": null}'
 ```
 
