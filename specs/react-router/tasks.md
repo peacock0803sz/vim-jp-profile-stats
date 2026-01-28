@@ -135,29 +135,29 @@
 
 ## C14 `:sparkles: Add categories and statistics services` [US1]
 
-- [ ] T049 Create api/src/services/categories.ts (getAllCategories, getCategory, getCategoryWithChildren)
-- [ ] T050 Create api/src/services/statistics.ts (getAllStatistics, getCategoryStatistics)
+- [x] T049 Create api/src/services/categories.ts (getAllCategories, getCategory, getCategoryWithChildren)
+- [x] T050 Create api/src/services/statistics.ts (getAllStatistics, getCategoryStatistics)
 
 ## C15 `:sparkles: Add categories and statistics API routes` [US1]
 
-- [ ] T051 Create api/src/routes/categories.ts (GET /categories, GET /categories/:id)
-- [ ] T052 Create api/src/routes/statistics.ts (GET /statistics, GET /statistics/:id)
+- [x] T051 Create api/src/routes/categories.ts (GET /categories, GET /categories/:id)
+- [x] T052 Create api/src/routes/statistics.ts (GET /statistics, GET /statistics/:id)
 
 ## C16 `:sparkles: Add statistics data hooks` [US1]
 
-- [ ] T053 Create frontend/src/hooks/useCategories.ts
-- [ ] T054 Create frontend/src/hooks/useStatistics.ts
+- [x] T053 Create frontend/src/hooks/useCategories.ts
+- [x] T054 Create frontend/src/hooks/useStatistics.ts
 
 ## C17 `:lipstick: Add statistics UI components` [US1]
 
-- [ ] T055 Create frontend/src/components/CategoryList.tsx
-- [ ] T056 Create frontend/src/components/StatisticsChart.tsx (Plotly.js)
-- [ ] T057 Create frontend/src/components/Breadcrumbs.tsx
+- [x] T055 Create frontend/src/components/CategoryList.tsx
+- [x] T056 Create frontend/src/components/StatisticsChart.tsx (Plotly.js)
+- [x] T057 Create frontend/src/components/Breadcrumbs.tsx
 
 ## C18 `:sparkles: Add dashboard and category routes` [US1]
 
-- [ ] T058 Create frontend/src/routes/index.tsx (dashboard)
-- [ ] T059 Create frontend/src/routes/categories.$id.tsx (category detail with drill-down)
+- [x] T058 Create frontend/src/routes/index.tsx (dashboard)
+- [x] T059 Create frontend/src/routes/categories.$id.tsx (category detail with drill-down)
 
 **Checkpoint**: US1 Complete - Statistics dashboard functional
 
