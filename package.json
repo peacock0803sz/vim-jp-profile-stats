@@ -1,0 +1,26 @@
+{
+  "name": "vim-jp-profile-stats",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "pnpm --parallel dev",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:api": "pnpm --filter api dev",
+    "build": "pnpm --filter frontend build && pnpm --filter api build",
+    "test": "pnpm --filter '*' test",
+    "test:watch": "pnpm --filter '*' test:watch",
+    "test:coverage": "pnpm --filter '*' test -- --coverage",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "typecheck": "pnpm --filter '*' typecheck",
+    "db:migrate": "pnpm --filter api db:migrate",
+    "db:seed": "pnpm --filter scripts seed",
+    "db:studio": "pnpm --filter api db:studio",
+    "migrate:sheets": "pnpm --filter scripts migrate",
+    "migrate:verify": "pnpm --filter scripts verify"
+  }
+}
