@@ -43,42 +43,42 @@
 
 ## C02 `:tada: Initialize pnpm monorepo with TypeScript`
 
-- [ ] T005 Create pnpm-workspace.yaml
-- [ ] T006 Create root package.json with workspace scripts
-- [ ] T007 Create root tsconfig.json (base TypeScript config)
-- [ ] T008 Create .env.example with environment variables
-- [ ] T009 Configure oxlint in oxlint.json
+- [x] T005 Create pnpm-workspace.yaml
+- [x] T006 Create root package.json with workspace scripts
+- [x] T007 Create root tsconfig.json (base TypeScript config)
+- [x] T008 Create .env.example with environment variables
+- [x] T009 Configure oxlint in oxlint.json
 
 ## C03 `:sparkles: Scaffold frontend React Router project`
 
-- [ ] T010 Initialize frontend/package.json with React Router v7, TanStack Query, Plotly.js
-- [ ] T011 Create frontend/tsconfig.json extending root
-- [ ] T012 Create frontend/vite.config.ts
-- [ ] T013 Create frontend/index.html
+- [x] T010 Initialize frontend/package.json with React Router v7, TanStack Query, Plotly.js
+- [x] T011 Create frontend/tsconfig.json extending root
+- [x] T012 Create frontend/vite.config.ts
+- [x] T013 Create frontend/index.html
 
 ## C04 `:sparkles: Scaffold api Hono project`
 
-- [ ] T014 Initialize api/package.json with Hono, Drizzle, Zod
-- [ ] T015 Create api/tsconfig.json extending root
-- [ ] T016 Create api/wrangler.toml for Cloudflare Workers/D1
+- [x] T014 Initialize api/package.json with Hono, Drizzle, Zod
+- [x] T015 Create api/tsconfig.json extending root
+- [x] T016 Create api/wrangler.toml for Cloudflare Workers/D1
 
 ## C05 `:wrench: Add Terraform Cloudflare modules`
 
-- [ ] T017 Create infra/providers.tf with Cloudflare provider
-- [ ] T018 Create infra/variables.tf with input variables
-- [ ] T019 Create infra/modules/database/main.tf (D1)
-- [ ] T020 Create infra/modules/api/main.tf (Workers)
-- [ ] T021 Create infra/modules/frontend/main.tf (Pages)
-- [ ] T022 Create infra/main.tf (root module)
-- [ ] T023 Create infra/outputs.tf
-- [ ] T024 Create infra/environments/dev.tfvars
-- [ ] T025 Create infra/.tflint.hcl
+- [x] T017 Create infra/providers.tf with Cloudflare provider
+- [x] T018 Create infra/variables.tf with input variables
+- [x] T019 Create infra/modules/database/main.tf (D1)
+- [x] T020 Create infra/modules/api/main.tf (Workers)
+- [x] T021 Create infra/modules/frontend/main.tf (Pages)
+- [x] T022 Create infra/main.tf (root module)
+- [x] T023 Create infra/outputs.tf
+- [x] T024 Create infra/environments/dev.tfvars
+- [x] T025 Create infra/.tflint.hcl
 
 ## C06 `:construction_worker: Add GitHub Actions workflows`
 
-- [ ] T026 Create .github/workflows/ci.yml (lint, test, build, terraform)
-- [ ] T027 Create .github/workflows/deploy.yml (production deployment)
-- [ ] T028 Create .github/dependabot.yml
+- [x] T026 Create .github/workflows/ci.yml (lint, test, build, terraform)
+- [x] T027 Create .github/workflows/deploy.yml (production deployment)
+- [x] T028 Create .github/dependabot.yml
 
 **Checkpoint**: Project scaffolding complete
 
