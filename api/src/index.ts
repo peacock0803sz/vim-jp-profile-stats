@@ -4,6 +4,7 @@ import { errorMiddleware } from "./middleware/error";
 import auth from "./routes/auth";
 import categoriesRoute from "./routes/categories";
 import statisticsRoute from "./routes/statistics";
+import responsesRoute from "./routes/responses";
 import type { Env } from "./db/client";
 
 export type AppEnv = {
@@ -23,5 +24,6 @@ app.get("/health", (c) => c.json({ status: "ok" }));
 app.route("/auth", auth);
 app.route("/categories", categoriesRoute);
 app.route("/statistics", statisticsRoute);
+app.route("/responses", responsesRoute);
 
 export default app;
