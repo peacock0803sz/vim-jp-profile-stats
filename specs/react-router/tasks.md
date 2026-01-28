@@ -167,15 +167,15 @@
 
 ## C19 `:sparkles: Add response service and routes` [US2]
 
-- [ ] T060 Create api/src/services/responses.ts (getResponseByUser)
-- [ ] T061 Create api/src/routes/responses.ts (GET /responses)
+- [x] T060 Create api/src/services/responses.ts (getResponseByUser)
+- [x] T061 Create api/src/routes/responses.ts (GET /responses)
 
 ## C20 `:alien: Add Google Sheets migration scripts` [US2]
 
-- [ ] T062 Create scripts/sheets-client.ts (Google Sheets API client)
-- [ ] T063 Create scripts/migrate.ts (migration logic)
-- [ ] T064 Create scripts/verify.ts (data verification)
-- [ ] T065 Create scripts/README.md (migration documentation)
+- [x] T062 Create scripts/sheets-client.ts (Google Sheets API client)
+- [x] T063 Create scripts/migrate.ts (migration logic)
+- [x] T064 Create scripts/verify.ts (data verification)
+- [x] T065 Create scripts/README.md (migration documentation)
 
 **Checkpoint**: US2 Complete - Data persistence and migration working
 
@@ -185,30 +185,30 @@
 
 ## C21 `:sparkles: Add response submission endpoint` [US3]
 
-- [ ] T066 Extend api/src/routes/responses.ts (PUT /responses/me, GET /responses/me)
-- [ ] T067 Extend api/src/services/responses.ts (submitResponse)
+- [x] T066 Extend api/src/routes/responses.ts (PUT /responses/me, GET /responses/me)
+- [x] T067 Extend api/src/services/responses.ts (submitResponse)
 
 ## C22 `:sparkles: Add auth context and hooks` [US3]
 
-- [ ] T068 Create frontend/src/contexts/AuthContext.tsx
-- [ ] T069 Create frontend/src/hooks/useAuth.ts
-- [ ] T070 Create frontend/src/hooks/useMyResponse.ts
+- [x] T068 Create frontend/src/contexts/AuthContext.tsx
+- [x] T069 Create frontend/src/hooks/useAuth.ts
+- [x] T070 Create frontend/src/hooks/useMyResponse.ts
 
 ## C23 `:lipstick: Add auth UI components` [US3]
 
-- [ ] T071 Create frontend/src/components/LoginButton.tsx
-- [ ] T072 Update frontend/src/components/Header.tsx (add user menu)
+- [x] T071 Create frontend/src/components/LoginButton.tsx
+- [x] T072 Update frontend/src/components/Header.tsx (add user menu)
 
 ## C24 `:lipstick: Add profile form components` [US3]
 
-- [ ] T073 Create frontend/src/components/ProfileForm.tsx
-- [ ] T074 Create frontend/src/components/CategorySelect.tsx
+- [x] T073 Create frontend/src/components/ProfileForm.tsx
+- [x] T074 Create frontend/src/components/CategorySelect.tsx
 
 ## C25 `:sparkles: Add auth and profile routes` [US3]
 
-- [ ] T075 Create frontend/src/routes/login.tsx
-- [ ] T076 Create frontend/src/routes/auth.callback.tsx
-- [ ] T077 Create frontend/src/routes/profile.tsx
+- [x] T075 Create frontend/src/routes/login.tsx
+- [x] T076 Create frontend/src/routes/auth.callback.tsx
+- [x] T077 Create frontend/src/routes/profile.tsx
 
 **Checkpoint**: US3 Complete - Profile submission form functional
 
