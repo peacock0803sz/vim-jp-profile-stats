@@ -1,13 +1,70 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 version: 2
+
 updates:
-  - package-ecosystem: "uv" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # npm dependencies
+  - package-ecosystem: npm
+    directory: /
     schedule:
-      interval: "weekly"
-    allow:
-      - dependency-type: direct
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: Asia/Tokyo
+    open-pull-requests-limit: 10
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "react-router"
+          - "@tanstack/*"
+      dev-tools:
+        patterns:
+          - "typescript"
+          - "vite"
+          - "vitest"
+          - "oxlint"
+        update-types:
+          - minor
+          - patch
+    labels:
+      - dependencies
+      - javascript
+    commit-message:
+      prefix: ":arrow_up:"
+
+  # GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: Asia/Tokyo
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: ":arrow_up:"
+    groups:
+      actions:
+        patterns:
+          - "*"
+
+  # Terraform providers
+  - package-ecosystem: terraform
+    directory: /infra
+    schedule:
+      interval: monthly
+      time: "09:00"
+      timezone: Asia/Tokyo
+    labels:
+      - dependencies
+      - terraform
+    commit-message:
+      prefix: ":arrow_up:"
