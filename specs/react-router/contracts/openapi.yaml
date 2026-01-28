@@ -1,0 +1,450 @@
+openapi: 3.1.0
+info:
+  title: vim-jp Profile Stats API
+  version: 1.0.0
+  description: vim-jp コミュニティの使用環境統計 API
+
+servers:
+  - url: /api
+    description: API base path
+
+paths:
+  # ============ Statistics (Public) ============
+  /statistics:
+    get:
+      operationId: getAllStatistics
+      summary: 全カテゴリの統計概要を取得
+      tags: [Statistics]
+      responses:
+        "200":
+          description: 統計概要リスト
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CategoryStatsSummary"
+
+  /statistics/{categoryId}:
+    get:
+      operationId: getCategoryStatistics
+      summary: カテゴリ別の詳細統計を取得
+      tags: [Statistics]
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: カテゴリ統計
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryStats"
+        "404":
+          description: カテゴリが見つからない
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  # ============ Categories (Public Read, Admin Write) ============
+  /categories:
+    get:
+      operationId: getAllCategories
+      summary: 全カテゴリを取得（階層構造）
+      tags: [Categories]
+      responses:
+        "200":
+          description: カテゴリリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+
+    post:
+      operationId: createCategory
+      summary: 新しいカテゴリを作成
+      tags: [Categories]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCategoryRequest"
+      responses:
+        "201":
+          description: 作成されたカテゴリ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+
+  /categories/{categoryId}:
+    get:
+      operationId: getCategory
+      summary: カテゴリを取得
+      tags: [Categories]
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: カテゴリ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+    patch:
+      operationId: updateCategory
+      summary: カテゴリを更新
+      tags: [Categories]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCategoryRequest"
+      responses:
+        "200":
+          description: 更新されたカテゴリ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  # ============ Responses (Authenticated) ============
+  /responses/me:
+    get:
+      operationId: getMyResponse
+      summary: 自分の回答を取得
+      tags: [Responses]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: 回答データ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+        "404":
+          description: 回答が存在しない
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+    put:
+      operationId: submitResponse
+      summary: 回答を送信（新規または更新）
+      tags: [Responses]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitResponseRequest"
+      responses:
+        "200":
+          description: 保存された回答
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  # ============ Authentication ============
+  /auth/github:
+    get:
+      operationId: startGitHubAuth
+      summary: GitHub OAuth 認証を開始
+      tags: [Auth]
+      responses:
+        "302":
+          description: GitHub 認可ページへリダイレクト
+
+  /auth/callback:
+    get:
+      operationId: handleOAuthCallback
+      summary: OAuth コールバック処理
+      tags: [Auth]
+      parameters:
+        - name: code
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "302":
+          description: フロントエンドへリダイレクト（Cookie にトークン設定）
+
+  /auth/me:
+    get:
+      operationId: getCurrentUser
+      summary: 現在のユーザー情報を取得
+      tags: [Auth]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: ユーザー情報
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /auth/logout:
+    post:
+      operationId: logout
+      summary: ログアウト
+      tags: [Auth]
+      responses:
+        "200":
+          description: ログアウト成功
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # ============ User ============
+    User:
+      type: object
+      required: [id, githubId, githubLogin, createdAt]
+      properties:
+        id:
+          type: integer
+        githubId:
+          type: integer
+        githubLogin:
+          type: string
+        avatarUrl:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    # ============ Category ============
+    Category:
+      type: object
+      required: [id, name, displayOrder]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          example: "Vim/Neovim"
+        parentId:
+          type: integer
+          nullable: true
+        displayOrder:
+          type: integer
+        children:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
+
+    CreateCategoryRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        parentId:
+          type: integer
+          nullable: true
+        displayOrder:
+          type: integer
+          default: 0
+
+    UpdateCategoryRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        parentId:
+          type: integer
+          nullable: true
+        displayOrder:
+          type: integer
+
+    # ============ Response ============
+    Response:
+      type: object
+      required: [id, userId, submittedAt, updatedAt, answers]
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        submittedAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        answers:
+          type: array
+          items:
+            $ref: "#/components/schemas/ResponseAnswer"
+
+    ResponseAnswer:
+      type: object
+      required: [categoryId, answerValue]
+      properties:
+        categoryId:
+          type: integer
+        categoryName:
+          type: string
+        answerValue:
+          type: string
+
+    SubmitResponseRequest:
+      type: object
+      required: [answers]
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            required: [categoryId, answerValue]
+            properties:
+              categoryId:
+                type: integer
+              answerValue:
+                type: string
+                minLength: 1
+
+    # ============ Statistics ============
+    CategoryStatsSummary:
+      type: object
+      required: [categoryId, categoryName, totalResponses, topAnswer]
+      properties:
+        categoryId:
+          type: integer
+        categoryName:
+          type: string
+        parentId:
+          type: integer
+          nullable: true
+        totalResponses:
+          type: integer
+        topAnswer:
+          type: string
+          description: 最も多い回答
+        topAnswerCount:
+          type: integer
+
+    CategoryStats:
+      type: object
+      required: [category, statistics, totalResponses]
+      properties:
+        category:
+          $ref: "#/components/schemas/Category"
+        totalResponses:
+          type: integer
+        statistics:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnswerStatistic"
+
+    AnswerStatistic:
+      type: object
+      required: [answerValue, count, percentage]
+      properties:
+        answerValue:
+          type: string
+        count:
+          type: integer
+        percentage:
+          type: number
+          format: float
+          description: 0-100 の割合
+
+    # ============ Error ============
+    Error:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+        details:
+          type: object
+
+  responses:
+    Unauthorized:
+      description: 認証が必要
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            message: "Authentication required"
+            code: "UNAUTHORIZED"
+
+    NotFound:
+      description: リソースが見つからない
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            message: "Resource not found"
+            code: "NOT_FOUND"
+
+    BadRequest:
+      description: リクエストが不正
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            message: "Validation failed"
+            code: "BAD_REQUEST"
