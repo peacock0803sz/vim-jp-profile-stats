@@ -55,8 +55,19 @@ jobs:
         with:
           terraform_version: ${{ env.TERRAFORM_VERSION }}
 
+      - name: Configure R2 Backend
+        run: |
+          cat > backend.hcl <<EOF
+          endpoints = {
+            s3 = "https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
+          }
+          access_key = "${{ secrets.R2_ACCESS_KEY_ID }}"
+          secret_key = "${{ secrets.R2_SECRET_ACCESS_KEY }}"
+          key        = "prod/terraform.tfstate"
+          EOF
+
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend-config=backend.hcl
 
       - uses: suzuki-shunsuke/tfcmt-action/setup@v1
 

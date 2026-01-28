@@ -100,8 +100,9 @@ jobs:
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
 
-      - name: Terraform Init
-        run: terraform init
+      # validate/lint は backend 不要
+      - name: Terraform Init (validate only)
+        run: terraform init -backend=false
 
       - name: Terraform Validate
         run: terraform validate
@@ -121,6 +122,23 @@ jobs:
         with:
           working_directory: infra
           soft_fail: true
+
+      # Plan は R2 backend が必要
+      - name: Configure R2 Backend
+        if: github.event_name == 'pull_request'
+        run: |
+          cat > backend.hcl <<EOF
+          endpoints = {
+            s3 = "https://${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com"
+          }
+          access_key = "${{ secrets.R2_ACCESS_KEY_ID }}"
+          secret_key = "${{ secrets.R2_SECRET_ACCESS_KEY }}"
+          key        = "prod/terraform.tfstate"
+          EOF
+
+      - name: Terraform Init (with R2 backend)
+        if: github.event_name == 'pull_request'
+        run: terraform init -reconfigure -backend-config=backend.hcl
 
       - name: Setup tfcmt
         if: github.event_name == 'pull_request'

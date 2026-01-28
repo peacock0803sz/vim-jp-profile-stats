@@ -178,8 +178,14 @@ tfenv use 1.9.0
 ### Cloudflare インフラ管理
 
 ```bash
-# 初期化
-terraform -chdir=infra init
+# Backend 設定ファイル作成
+cp infra/backend.hcl.example infra/backend.hcl
+# backend.hcl を編集 (R2 の認証情報を設定)
+
+# 初期化 (R2 backend)
+terraform -chdir=infra init \
+  -backend-config=backend.hcl \
+  -backend-config="key=dev/terraform.tfstate"
 
 # 差分確認（dev 環境）
 terraform -chdir=infra plan \
@@ -191,6 +197,12 @@ terraform -chdir=infra apply \
 
 # リソース状態確認
 terraform -chdir=infra show
+```
+
+**R2 バケットの事前準備:**
+```bash
+# Cloudflare ダッシュボードまたは Wrangler CLI で R2 バケットを作成
+wrangler r2 bucket create vim-jp-terraform-state
 ```
 
 ### D1 マイグレーション (Wrangler)

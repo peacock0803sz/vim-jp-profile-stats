@@ -160,6 +160,7 @@ devenv.local.nix
 *.tfvars
 !infra/environments/*.tfvars
 .terraform.lock.hcl
+backend.hcl
 crash.log
 crash.*.log
 override.tf

@@ -13,14 +13,14 @@ resource "cloudflare_pages_project" "frontend" {
   source {
     type = "github"
     config {
-      owner                         = var.github_repo_owner
-      repo_name                     = var.github_repo_name
-      production_branch             = "main"
-      deployments_enabled           = true
+      owner                          = var.github_repo_owner
+      repo_name                      = var.github_repo_name
+      production_branch              = "main"
+      deployments_enabled            = true
       production_deployments_enabled = true
-      pr_comments_enabled           = true
-      preview_deployment_setting    = "custom"
-      preview_branch_includes       = ["react-router", "feature/*"]
+      pr_comments_enabled            = true
+      preview_deployment_setting     = "custom"
+      preview_branch_includes        = ["react-router", "feature/*"]
     }
   }
 

@@ -1,0 +1,21 @@
+# Cloudflare R2 backend 設定
+# コピーして backend.hcl を作成:
+#   cp backend.hcl.example backend.hcl
+#
+# 使用方法:
+#   terraform init -backend-config=backend.hcl -backend-config="key=dev/terraform.tfstate"
+#
+# R2 API トークンは Cloudflare ダッシュボードで作成:
+#   R2 > Manage R2 API Tokens > Create API Token
+#   権限: Object Read & Write
+
+# R2 エンドポイント (account_id を置き換え)
+endpoints = {
+  s3 = "https://YOUR_ACCOUNT_ID.r2.cloudflarestorage.com"
+}
+
+# R2 API トークンの Access Key ID
+access_key = "your_r2_access_key_id"
+
+# R2 API トークンの Secret Access Key
+secret_key = "your_r2_secret_access_key"
