@@ -31,6 +31,20 @@ const router = createBrowserRouter([
         path: "profile",
         lazy: () => import("./routes/profile"),
       },
+      {
+        path: "admin",
+        lazy: () => import("./routes/admin"),
+        children: [
+          {
+            path: "categories",
+            lazy: () => import("./routes/admin.categories"),
+          },
+          {
+            path: "categories/:id",
+            lazy: () => import("./routes/admin.categories.$id"),
+          },
+        ],
+      },
     ],
   },
 ]);
