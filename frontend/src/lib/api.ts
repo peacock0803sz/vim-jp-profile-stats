@@ -2,6 +2,8 @@ import type {
   Category,
   CategoryStats,
   CategoryStatsSummary,
+  CreateCategoryInput,
+  UpdateCategoryInput,
   Response,
   SubmitResponseInput,
   User,
@@ -47,5 +49,33 @@ export const api = {
     fetcher<Response>("/responses/me", {
       method: "PUT",
       body: JSON.stringify(input),
+    }),
+
+  // Admin: Categories
+  createCategory: (input: CreateCategoryInput) =>
+    fetcher<Category>("/admin/categories", {
+      method: "POST",
+      body: JSON.stringify(input),
+    }),
+  updateCategory: (id: number, input: UpdateCategoryInput) =>
+    fetcher<Category>(`/admin/categories/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(input),
+    }),
+  deleteCategory: (id: number) =>
+    fetcher<void>(`/admin/categories/${id}`, { method: "DELETE" }),
+
+  // Admin: Category Values
+  addCategoryValue: (categoryId: number, value: string, displayOrder?: number) =>
+    fetcher<{ id: number; categoryId: number; value: string }>(
+      `/categories/${categoryId}/values`,
+      {
+        method: "POST",
+        body: JSON.stringify({ value, displayOrder: displayOrder ?? 0 }),
+      },
+    ),
+  deleteCategoryValue: (categoryId: number, valueId: number) =>
+    fetcher<void>(`/categories/${categoryId}/values/${valueId}`, {
+      method: "DELETE",
     }),
 };
