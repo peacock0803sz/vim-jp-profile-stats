@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/query";
+import { AuthProvider } from "./contexts/AuthContext";
 import Root from "./routes/root";
 
 const router = createBrowserRouter([
@@ -18,6 +19,18 @@ const router = createBrowserRouter([
         path: "categories/:id",
         lazy: () => import("./routes/categories.$id"),
       },
+      {
+        path: "login",
+        lazy: () => import("./routes/login"),
+      },
+      {
+        path: "auth/callback",
+        lazy: () => import("./routes/auth.callback"),
+      },
+      {
+        path: "profile",
+        lazy: () => import("./routes/profile"),
+      },
     ],
   },
 ]);
@@ -25,7 +38,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </QueryClientProvider>
   </StrictMode>,
 );
