@@ -6,6 +6,11 @@ import type { AppEnv } from "../index";
 
 const auth = new Hono<AppEnv>();
 
+const GITHUB_HEADERS = {
+  "User-Agent": "vim-jp-profile-stats",
+  Accept: "application/json",
+};
+
 // GitHub OAuth 開始
 auth.get("/github", (c) => {
   const clientId = c.env.GITHUB_CLIENT_ID;
@@ -24,8 +29,8 @@ auth.get("/callback", async (c) => {
   const tokenRes = await fetch("https://github.com/login/oauth/access_token", {
     method: "POST",
     headers: {
+      ...GITHUB_HEADERS,
       "Content-Type": "application/json",
-      Accept: "application/json",
     },
     body: JSON.stringify({
       client_id: c.env.GITHUB_CLIENT_ID,
@@ -33,22 +38,38 @@ auth.get("/callback", async (c) => {
       code,
     }),
   });
+
+  if (!tokenRes.ok) {
+    const text = await tokenRes.text();
+    console.error("[auth/callback] token exchange failed:", tokenRes.status, text);
+    return c.json({ message: "GitHub token exchange failed" }, 502);
+  }
+
   const tokenData = (await tokenRes.json()) as {
     access_token?: string;
     error?: string;
+    error_description?: string;
   };
 
   if (!tokenData.access_token) {
-    return c.json({ message: "Failed to get access token" }, 400);
+    console.error("[auth/callback] no access_token:", tokenData);
+    return c.json({ message: tokenData.error_description ?? "Failed to get access token" }, 400);
   }
 
   // GitHub ユーザー情報取得
   const userRes = await fetch("https://api.github.com/user", {
     headers: {
+      ...GITHUB_HEADERS,
       Authorization: `Bearer ${tokenData.access_token}`,
-      Accept: "application/json",
     },
   });
+
+  if (!userRes.ok) {
+    const text = await userRes.text();
+    console.error("[auth/callback] user fetch failed:", userRes.status, text);
+    return c.json({ message: "Failed to fetch GitHub user" }, 502);
+  }
+
   const githubUser = (await userRes.json()) as {
     id: number;
     login: string;
