@@ -1,5 +1,0 @@
-cloudflare_account_id = "YOUR_ACCOUNT_ID"
-environment           = "dev"
-github_repo_owner     = "peacock0803sz"
-github_repo_name      = "vim-jp-profile-stats"
-custom_domain         = ""

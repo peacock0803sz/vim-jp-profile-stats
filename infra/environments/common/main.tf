@@ -1,12 +1,12 @@
 module "database" {
-  source = "./modules/database"
+  source = "../../modules/database"
 
   account_id  = var.cloudflare_account_id
   environment = var.environment
 }
 
 module "api" {
-  source = "./modules/api"
+  source = "../../modules/api"
 
   account_id           = var.cloudflare_account_id
   environment          = var.environment
@@ -17,7 +17,7 @@ module "api" {
 }
 
 module "frontend" {
-  source = "./modules/frontend"
+  source = "../../modules/frontend"
 
   account_id        = var.cloudflare_account_id
   environment       = var.environment
