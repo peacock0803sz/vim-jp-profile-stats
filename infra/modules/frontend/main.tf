@@ -3,20 +3,19 @@ resource "cloudflare_pages_project" "frontend" {
   name              = "vim-jp-stats-${var.environment}"
   production_branch = "main"
 
-  build_config {
+  build_config = {
     build_command   = "pnpm build"
     destination_dir = "dist"
     root_dir        = "frontend"
     build_caching   = true
   }
 
-  source {
+  source = {
     type = "github"
-    config {
+    config = {
       owner                          = var.github_repo_owner
       repo_name                      = var.github_repo_name
       production_branch              = "main"
-      deployments_enabled            = true
       production_deployments_enabled = true
       pr_comments_enabled            = true
       preview_deployment_setting     = "custom"
@@ -24,8 +23,8 @@ resource "cloudflare_pages_project" "frontend" {
     }
   }
 
-  deployment_configs {
-    production {
+  deployment_configs = {
+    production = {
       compatibility_date = "2025-01-01"
       env_vars = {
         VITE_API_URL = {
@@ -43,7 +42,7 @@ resource "cloudflare_pages_project" "frontend" {
         }
       }
     }
-    preview {
+    preview = {
       compatibility_date = "2025-01-01"
       env_vars = {
         VITE_API_URL = {
@@ -63,5 +62,5 @@ resource "cloudflare_pages_domain" "custom" {
   count        = var.custom_domain != "" ? 1 : 0
   account_id   = var.account_id
   project_name = cloudflare_pages_project.frontend.name
-  domain       = var.custom_domain
+  name         = var.custom_domain
 }

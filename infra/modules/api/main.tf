@@ -2,7 +2,10 @@ resource "cloudflare_workers_script" "api" {
   account_id  = var.account_id
   script_name = "vim-jp-api-${var.environment}"
   main_module = "index.js"
-  content     = file("${path.module}/../../../api/dist/index.js")
+
+  # content_file と content_sha256 を使用（ファイルが存在する場合のみ plan 可能）
+  content_file   = "${path.module}/../../../api/dist/index.js"
+  content_sha256 = filesha256("${path.module}/../../../api/dist/index.js")
 
   compatibility_date  = "2025-01-01"
   compatibility_flags = ["nodejs_compat"]
@@ -35,13 +38,13 @@ resource "cloudflare_workers_script" "api" {
     }
   ]
 
-  placement {
+  placement = {
     mode = "smart"
   }
 
-  observability {
+  observability = {
     enabled = true
-    logs {
+    logs = {
       enabled         = true
       invocation_logs = var.environment == "dev"
     }
