@@ -33,6 +33,7 @@
               git
               nodejs_22
               corepack_22
+              cacert
 
               terraform
               tflint
@@ -42,6 +43,7 @@
 
             env = {
               PROJECT_NAME = "vim-jp-profile-stats";
+              SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
             };
 
             shellHook = ''
