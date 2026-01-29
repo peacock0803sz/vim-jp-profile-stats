@@ -9,6 +9,7 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "db:migrate": "wrangler d1 migrations apply vim-jp-profile-stats-dev --local",
+    "db:seed": "wrangler d1 execute vim-jp-profile-stats-dev --local --file=migrations/seed.sql",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {

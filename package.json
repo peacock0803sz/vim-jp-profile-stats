@@ -18,7 +18,7 @@
     "lint:fix": "oxlint --fix .",
     "typecheck": "pnpm --filter '*' typecheck",
     "db:migrate": "pnpm --filter api db:migrate",
-    "db:seed": "pnpm --filter scripts seed",
+    "db:seed": "pnpm --filter api db:seed",
     "db:studio": "pnpm --filter api db:studio",
     "migrate:sheets": "pnpm --filter scripts migrate",
     "migrate:verify": "pnpm --filter scripts verify"

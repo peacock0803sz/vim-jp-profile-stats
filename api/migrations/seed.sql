@@ -1,0 +1,21 @@
+-- 初期カテゴリデータ投入
+INSERT INTO categories (name, parent_id, display_order) VALUES
+  ('OS', NULL, 0),
+  ('Shell', NULL, 1),
+  ('端末ソフトウェア', NULL, 2),
+  ('マルチターミナルプレクサ', NULL, 3),
+  ('ブラウザ', NULL, 4),
+  ('キーボード', NULL, 5),
+  ('ポインティングデバイス', NULL, 6),
+  ('IME', NULL, 7),
+  ('Vim/Neovim', NULL, 8),
+  ('プラグインマネージャー', NULL, 9),
+  ('LSP', NULL, 10),
+  ('補完', NULL, 11),
+  ('Fuzzy Finder', NULL, 12),
+  ('taskrunner', NULL, 13),
+  ('colorscheme', NULL, 14),
+  ('statusline', NULL, 15),
+  ('snippet', NULL, 16),
+  ('ファイラー', NULL, 17),
+  ('ターミナル拡張', NULL, 18);
