@@ -13,3 +13,12 @@ updates:
       default-days: 3
     allow:
       - dependency-type: direct
+
+  - package-ecosystem: "github-actions" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 3
+    allow:
+      - dependency-type: direct
