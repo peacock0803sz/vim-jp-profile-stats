@@ -1127,7 +1127,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "gspread", specifier = ">=6.1.2" },
+    { name = "gspread", specifier = ">=6.2.1" },
     { name = "mypy", marker = "extra == 'dev'" },
     { name = "plotly", specifier = ">=6.9.0" },
     { name = "ruff", marker = "extra == 'dev'" },
